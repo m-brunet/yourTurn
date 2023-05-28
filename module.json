@@ -36,7 +36,7 @@
       "path": "lang/de.json"
     }
   ],
-  "url": "https://github.com/NotoriusNeo/your-turn",
-  "download": "https://github.com/NotoriusNeo/foundryvtt-dice-cheater-protector/releases/download/latest/dice-rng-protector.zip",
-  "manifest": "https://github.com/NotoriusNeo/foundryvtt-dice-cheater-protector/releases/download/latest/module.json"
+  "url": "https://github.com/NotoriusNeo/yourTurn",
+  "download": "https://github.com/NotoriusNeo/yourTurn/releases/download/latest/module.zip",
+  "manifest": "https://github.com/NotoriusNeo/yourTurn/releases/download/latest/module.json"
 }
