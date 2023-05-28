@@ -8,12 +8,29 @@ export default class TurnSubscriber {
     static expectedNext;
     static begin() {
         Hooks.on("ready", () => {
-            const firstGm = game.users.find((u) => u.isGM && u.active);
-            this.gmColor = firstGm?.color;
-            Hooks.on("updateCombat", (combat, update, options, userId) => {
-                this._onUpdateCombat(combat, update, options, userId);
+            this.waitForGM().then((gm) => {
+                this.gmColor = gm.color;
+                Hooks.on("updateCombat", (combat, update, options, userId) => {
+                    this._onUpdateCombat(combat, update, options, userId);
+                });
             });
         });
+    }
+    static async waitForGM() {
+        const gm = game.users.find((u) => u.isGM && u.active);
+        if (gm) {
+            return gm;
+        } else {
+            await new Promise((resolve) => {
+                const interval = setInterval(() => {
+                    const gm = game.users.find((u) => u.isGM && u.active);
+                    if (gm) {
+                        clearInterval(interval);
+                        resolve(gm);
+                    }
+                }, 1000);
+            });
+        }
     }
     static _onUpdateCombat(combat, update, options, userId) {
         if (!update["turn"] && !update["round"]) return;
