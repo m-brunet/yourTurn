@@ -1,12 +1,12 @@
 const modName = 'your-turn';
 const settings = {
     startCounterAtOne: {
-        name: 'Start Round/Turn Counter at 1',
-        hint: 'Toggle to start the round/turn counter at 1 instead of 0.',
+        name: 'Start Turn Counter at 1',
+        hint: 'Toggle to start the turn counter at 1 instead of 0.',
         scope: 'world',
         config: true,
         type: Boolean,
-        default: false
+        default: true
     },
     useTokens: {
         name: 'Use Tokens Instead of Artwork',
@@ -14,7 +14,7 @@ const settings = {
         scope: 'world',
         config: true,
         type: Boolean,
-        default: true
+        default: false
     },
 };
 

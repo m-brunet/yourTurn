@@ -105,12 +105,13 @@ export default class TurnSubscriber {
             console.log(imgHTML);
         }
         const bannerDiv = document.createElement("div");
+        const turnNumber = Settings.getStartCounterAtOne() ? combat.turn + 1 : combat.turn;
         bannerDiv.id = "yourTurnBanner";
         bannerDiv.className = "yourTurnBanner";
         bannerDiv.style.height = "150px";
         bannerDiv.innerHTML = `<p id="yourTurnText" class="yourTurnText">${ytText}</p><div class="yourTurnSubheading">${game.i18n.localize(
       "YOUR-TURN.Round"
-    )} #${combat.round} ${game.i18n.localize("YOUR-TURN.Turn")} #${combat.turn}</div>${this.getNextTurnHtml(
+    )} #${combat.round} ${game.i18n.localize("YOUR-TURN.Turn")} #${turnNumber}</div>${this.getNextTurnHtml(
       nextCombatant
     )}<div id="yourTurnBannerBackground" class="yourTurnBannerBackground" height="150"></div>`;
         const r = document.querySelector(":root");
@@ -133,7 +134,7 @@ export default class TurnSubscriber {
             this.unloadImage();
         }, 5000);
         let imageHTML;
-        if (this.useTokens) {
+        if (Settings.getUseTokens()) {
             const token = combat?.combatant.token;
             if (token) {
                 imageHTML = this.getTokenImage(token);
