@@ -1,8 +1,15 @@
 {
-  "name": "your-turn",
+  "id": "your-turn",
   "title": "Your Turn!",
   "description": "A simple module which adds a user specific to do list.",
-  "version": "1.2",
+  "version": "1.2.1",
+  "minimumCoreVersion": "10",
+  "compatibleCoreVersion": "11",
+  "compatibility": {
+    "minimum": "10",
+    "verified": 11.299,
+    "maximum": 11
+  },
   "authors": [
     {
       "name": "Autmor"
@@ -29,16 +36,7 @@
       "path": "lang/de.json"
     }
   ],
-  "url": "https://github.com/NotoriusNeo/yourTurn",
-  "manifest": "",
-  "download": "",
-  "bugs": "https://github.com/NotoriusNeo/yourTurn/-/issues",
-  "readme": "https://github.com/NotoriusNeo/yourTurn/blob/main/README.md",
-  "flags": {
-    "allowBugReporter": true
-  },
-  "compatibility": {
-    "minimum": "10",
-    "verified": "11"
-  }
+  "url": "https://github.com/NotoriusNeo/your-turn",
+  "download": "https://github.com/NotoriusNeo/foundryvtt-dice-cheater-protector/releases/download/latest/dice-rng-protector.zip",
+  "manifest": "https://github.com/NotoriusNeo/foundryvtt-dice-cheater-protector/releases/download/latest/module.json"
 }
