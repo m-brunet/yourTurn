@@ -6,6 +6,7 @@ export default class TurnSubscriber {
     static currentImgID = null;
     static nextImgID;
     static expectedNext;
+    static useTokens = true; // Set this to false if you want to use full actor artwork
     static begin() {
         Hooks.on("ready", () => {
             this.waitForGM().then((gm) => {
@@ -31,6 +32,12 @@ export default class TurnSubscriber {
                 }, 1000);
             });
         }
+    }
+    static getTokenImage(token) {
+        const scale = token.getFlag("core", "tokenHUD.scale") || 1;
+        const img = token.data.img;
+        const size = Math.ceil(canvas.dimensions.size * scale);
+        return `<img src="${img}" width="${size}" height="${size}" />`;
     }
     static _onUpdateCombat(combat, update, options, userId) {
         if (!update["turn"] && !update["round"]) return;
@@ -118,6 +125,15 @@ export default class TurnSubscriber {
         this.myTimer = setInterval(() => {
             this.unloadImage();
         }, 5000);
+        let imageHTML;
+        if (this.useTokens) {
+            const token = combat?.combatant.token;
+            if (token) {
+                imageHTML = this.getTokenImage(token);
+            }
+        } else {
+            imageHTML = `<img src="${expectedNext?.actor.img}" />`;
+        }
     }
     static loadNextImage(combat) {
         const nextTurn = combat.turn + 1;
