@@ -2,10 +2,13 @@
   "name": "your-turn",
   "title": "Your Turn!",
   "description": "A simple module which adds a user specific to do list.",
-  "version": "1.00",
+  "version": "1.2",
   "authors": [
     {
       "name": "Autmor"
+    },
+    {
+      "name": "NotoriusNeo"
     }
   ],
   "esmodules": [
@@ -26,16 +29,16 @@
       "path": "lang/de.json"
     }
   ],
-  "url": "https://github.com/Autmor/yourTurn",
+  "url": "https://github.com/NotoriusNeo/yourTurn",
   "manifest": "",
   "download": "",
-  "bugs": "https://github.com/Autmor/yourTurn/-/issues",
-  "readme": "https://github.com/Autmor/yourTurn/blob/main/README.md",
+  "bugs": "https://github.com/NotoriusNeo/yourTurn/-/issues",
+  "readme": "https://github.com/NotoriusNeo/yourTurn/blob/main/README.md",
   "flags": {
     "allowBugReporter": true
   },
   "compatibility": {
     "minimum": "10",
-    "verified": "10"
+    "verified": "11"
   }
 }
