@@ -15,7 +15,7 @@
       "name": "Autmor"
     },
     {
-      "name": "NotoriusNeo"
+      "name": "EndlessFractal"
     }
   ],
   "esmodules": [
@@ -36,7 +36,7 @@
       "path": "lang/de.json"
     }
   ],
-  "url": "https://github.com/NotoriusNeo/yourTurn",
-  "download": "https://github.com/NotoriusNeo/yourTurn/releases/download/latest/module.zip",
-  "manifest": "https://github.com/NotoriusNeo/yourTurn/releases/download/latest/module.json"
+  "url": "https://github.com/EndlessFractal/yourTurn",
+  "download": "https://github.com/EndlessFractal/yourTurn/releases/download/latest/module.zip",
+  "manifest": "https://github.com/EndlessFractal/yourTurn/releases/download/latest/module.json"
 }
