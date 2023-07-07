@@ -51,8 +51,8 @@ export default class TurnSubscriber {
         if (!combat.started) return;
         if (combat.combatant === this.lastCombatant) return;
         this.lastCombatant = combat.combatant;
-        this.image = combat?.combatant.actor.img;
-        let ytName = combat?.combatant.name;
+        this.image = combat?.combatant?.actor?.img;
+        let ytName = combat?.combatant?.name;
         let ytText = "";
         const ytImgClass = ["adding"];
         if (game.modules.get("combat-utility-belt")?.active) {
