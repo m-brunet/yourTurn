@@ -59,6 +59,15 @@ export default class TurnSubscriber {
         const size = Math.ceil(canvas.dimensions.size * scale);
         return `<img src="${img}" width="${size}" height="${size}" />`;
     }
+    static getNamePf2eSupport(combat, combatant) {
+        let ytName = combatant.name;
+        if (combat._stats.systemId === 'pf2e') {
+            const isVisible = combatant.isOwner || combatant.token.displayName >= 30;
+            ytName = isVisible ? combatant.name : "Unknown Character";
+        }
+
+        return ytName;
+    }
     // Static method that handles the updateCombat hook
     static _onUpdateCombat(combat, update, options, userId) {
         // Check if the turn or round has changed
@@ -72,7 +81,7 @@ export default class TurnSubscriber {
         // Get the image of the current combatant's actor
         this.image = combat?.combatant.actor.img;
         // Get the name of the current combatant
-        let ytName = combat?.combatant.name;
+        let ytName = this.getNamePf2eSupport(combat, combat?.combatant);
         // Initialize the ytText and ytImgClass variables
         let ytText = "";
         const ytImgClass = ["adding"];
@@ -141,10 +150,11 @@ export default class TurnSubscriber {
         bannerDiv.className = "yourTurnBanner";
         bannerDiv.style.height = "150px";
         bannerDiv.innerHTML = `<p id="yourTurnText" class="yourTurnText">${ytText}</p><div class="yourTurnSubheading">${game.i18n.localize(
-      "YOUR-TURN.Round"
-    )} #${combat.round} ${game.i18n.localize("YOUR-TURN.Turn")} #${turnNumber}</div>${this.getNextTurnHtml(
-      nextCombatant
-    )}<div id="yourTurnBannerBackground" class="yourTurnBannerBackground" height="150"></div>`;
+            "YOUR-TURN.Round"
+        )} #${combat.round} ${game.i18n.localize("YOUR-TURN.Turn")} #${turnNumber}</div>${this.getNextTurnHtml(
+            combat,
+            nextCombatant
+        )}<div id="yourTurnBannerBackground" class="yourTurnBannerBackground" height="150"></div>`;
         // Set the CSS variables for player and GM colors
         const r = document.querySelector(":root");
         if (combat?.combatant?.hasPlayerOwner && combat?.combatant?.players[0].active) {
@@ -182,9 +192,8 @@ export default class TurnSubscriber {
     // Static method that loads the image for the next turn
     static loadNextImage(combat) {
         const nextTurn = combat.turn + 1;
-        const hiddenImgHTML = `<div id="yourTurnPreload"><img id="yourTurnPreloadImg" src=${
-      combat?.turns[(combat.turn + 1) % combat.turns.length].actor.img
-    } loading="eager" width="800" height="800"></img><div>`;
+        const hiddenImgHTML = `<div id="yourTurnPreload"><img id="yourTurnPreloadImg" src=${combat?.turns[(combat.turn + 1) % combat.turns.length].actor.img
+            } loading="eager" width="800" height="800"></img><div>`;
         const yourTurnPreloadDiv = document.querySelector("div#yourTurnPreload");
         if (yourTurnPreloadDiv) {
             yourTurnPreloadDiv.remove();
@@ -212,9 +221,9 @@ export default class TurnSubscriber {
         return combatant;
     }
     // Static method that generates the HTML for the next turn
-    static getNextTurnHtml(combatant) {
+    static getNextTurnHtml(combat, combatant) {
         const displayNext = true;
-        let name = combatant.name;
+        let name = this.getNamePf2eSupport(combat, combatant);
         let imgClass = "yourTurnImg yourTurnSubheading";
         if (game.modules.get("combat-utility-belt")?.active) {
             if (game.cub.hideNames.shouldReplaceName(combatant?.actor)) {
@@ -224,8 +233,8 @@ export default class TurnSubscriber {
         }
         if (displayNext) {
             const rv = `<div class="yourTurnSubheading last">${game.i18n.localize(
-        "YOUR-TURN.NextUp"
-      )}:  <img class="${imgClass}" src="${combatant.actor.img}"></img>${name}</div>`;
+                "YOUR-TURN.NextUp"
+            )}:  <img class="${imgClass}" src="${combatant.actor.img}"></img>${name}</div>`;
             console.log(rv);
             return rv;
         } else {
